@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import ShellNav from '../components/ShellNav';
-import Homepage from '../components/Homepage';
+import Homepage from '../components/pages/Homepage';
 
 export default function Home() {
   return (
@@ -10,11 +10,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <ShellNav></ShellNav>
-
-      <br />
-
-      <Homepage></Homepage>
+      <ShellNav>
+        <Homepage></Homepage>
+      </ShellNav>
     </div>
-  )
+  );
 }
