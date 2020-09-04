@@ -38,19 +38,7 @@ export default class PublicGuard extends Component {
         <div></div>
       );
     } else if (!!this.state.username) {
-      return (
-        <div>
-          <ShellNav username={this.state.username}></ShellNav>
-  
-          {
-            React.Children.map(children, child => {
-              return React.cloneElement(child, {
-                username: this.state.username
-              });
-            })
-          }
-        </div>
-      );
+      window.location.replace('/profile');
     } else {
       return (
         <div>

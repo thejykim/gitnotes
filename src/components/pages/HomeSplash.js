@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 
 import { Component } from 'react';
 import { useRouter } from 'next/router';
@@ -15,7 +16,8 @@ export default class HomeSplash extends Component {
     this.state = {
       username: null,
       email: null,
-      password: null
+      password: null,
+      error: null
     }
 
     this.handleSignup = this.handleSignup.bind(this);
@@ -29,10 +31,12 @@ export default class HomeSplash extends Component {
     if (this.state.email && this.state.password) {
       registerUser(this.state.username, this.state.email, this.state.password)
         .then((result) => {
-          useRouter().push('/profile');
+          window.location.replace('/profile');
         })
         .catch((error) => {
-          console.log(error);
+          this.setState({
+            error: error.toString()
+          });
         })
     } else {
 
@@ -62,21 +66,23 @@ export default class HomeSplash extends Component {
               <Col>
                 <Card className="shadow-sm">
                   <Card.Body>
+                    {this.state.error ? <Alert variant='danger'>{this.state.error}</Alert> : null}
+
                     <Form onSubmit={this.handleSignup}>
                       <Form.Group controlId="formUsername">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control name="username" type="input" placeholder="Have anything witty?" onChange={this.handleChange} />
+                        <Form.Control name="username" type="input" placeholder="Have anything witty?" onChange={this.handleChange} required />
                       </Form.Group>
 
                       <Form.Group controlId="formEmail">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control name="email" type="email" placeholder="No spam, ever." onChange={this.handleChange} />
+                        <Form.Control name="email" type="email" placeholder="No spam, ever." onChange={this.handleChange} required />
                         <Form.Text className="small text-muted">We'll never share your email with anyone else.</Form.Text>
                       </Form.Group>
 
                       <Form.Group controlId="formPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control name="password" type="password" placeholder="Secure your account." onChange={this.handleChange} />
+                        <Form.Control name="password" type="password" placeholder="Secure your account." onChange={this.handleChange} required />
                       </Form.Group>
 
                       <Button variant="primary" className="w-100" type="submit" style={{ textAlign: 'center' }} >Sign up</Button>
