@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 
-// it's totally fine to upload this config on GitHub, since
-// the security rules *should* prevent data manipulation
+// it should be fine to upload this config on GitHub, since
+// my security rules *should* prevent data manipulation
 
 const config = {
   apiKey: "AIzaSyCljOm2LWhN4K6k5iSgaFBgW1cZyY1h22o",

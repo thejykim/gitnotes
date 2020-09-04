@@ -1,13 +1,13 @@
 import { Component } from "react";
-import ShellNav from "../components/ShellNav";
+import PublicGuard from '../services/PublicGuard';
 import LoginPage from "../components/pages/LoginPage";
 
 export default class Login extends Component {
   render() {
     return (
-      <ShellNav>
+      <PublicGuard>
         <LoginPage></LoginPage>
-      </ShellNav>
+      </PublicGuard>
     );
   }
 }

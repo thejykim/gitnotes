@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import ShellNav from '../components/ShellNav';
+import PublicGuard from '../services/PublicGuard';
 import Homepage from '../components/pages/Homepage';
 
 export default function Home() {
@@ -10,9 +10,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <ShellNav>
+      <PublicGuard>
         <Homepage></Homepage>
-      </ShellNav>
+      </PublicGuard>
     </div>
   );
 }
