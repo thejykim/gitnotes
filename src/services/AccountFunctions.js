@@ -27,9 +27,9 @@ export function usernamePasswordSignin(username, password) {
     db.ref('users').orderByChild('username').equalTo(username).once('value', function (snapshot) {
       if (snapshot.hasChildren()) {
         const json = snapshot.toJSON();
-        console.log(JSON.stringify(json));
+        const key = Object.keys(json)[0];
 
-        auth().signInWithEmailAndPassword(null, password)
+        auth().signInWithEmailAndPassword(json[key].email, password)
           .then((user) => {
             resolve(user);
           })
