@@ -9,6 +9,7 @@ import { fab, faGithub } from '@fortawesome/free-brands-svg-icons';
 
 import { auth } from '../../services/firebase';
 import { usernamePasswordSignin } from '../../services/AccountFunctions';
+import { mapErrorToField } from 'handle-firebase-error';
 
 library.add(fab, faGithub);
 
@@ -59,7 +60,6 @@ export default class LoginPage extends Component {
           <Card className="shadow-sm" style={{ width: '25rem' }}>
             <Card.Body>
               { this.state.error ? <Alert variant='danger'>{ this.state.error }</Alert> : null }
-
               <Form onSubmit={this.handleSignin}>
                 <Form.Group controlId="username">
                   <Form.Label>Username</Form.Label>
