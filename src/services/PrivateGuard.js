@@ -31,12 +31,14 @@ export default class PrivateGuard extends Component {
   }
 
   render() {
+    const children = this.props.children;
+    
     if (this.state.loading) {
       return (
         <div></div>
       );
     } else if (!this.state.username) {
-      useRouter().push('/login');
+      window.location.replace('/login');
     } else {
       return (
         <div>

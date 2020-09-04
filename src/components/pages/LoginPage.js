@@ -2,12 +2,14 @@ import { Component } from "react";
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab, faGithub } from '@fortawesome/free-brands-svg-icons';
 
 import { auth } from '../../services/firebase';
 import { usernamePasswordSignin } from '../../services/AccountFunctions';
+import { mapErrorToField } from 'handle-firebase-error';
 
 library.add(fab, faGithub);
 
@@ -17,7 +19,8 @@ export default class LoginPage extends Component {
 
     this.state = {
       username: null,
-      password: null
+      password: null,
+      error: null
     };
 
     this.handleSignin = this.handleSignin.bind(this);
@@ -38,11 +41,10 @@ export default class LoginPage extends Component {
     if (this.state.username && this.state.password) {
       usernamePasswordSignin(this.state.username, this.state.password)
         .then((user) => {
-          console.log(user);
-          console.log("Success!");
+          window.location.replace('/profile');
         })
         .catch((error) => {
-          console.log(error);
+          this.setState({error: Object.values(mapErrorToField(error))[0]});
         });
     }
 
@@ -57,15 +59,16 @@ export default class LoginPage extends Component {
         <div className="d-flex justify-content-center" style={{ textAlign: 'left', padding: '1rem 0' }}>
           <Card className="shadow-sm" style={{ width: '25rem' }}>
             <Card.Body>
+              { this.state.error ? <Alert variant='danger'>{ this.state.error }</Alert> : null }
               <Form onSubmit={this.handleSignin}>
                 <Form.Group controlId="username">
                   <Form.Label>Username</Form.Label>
-                  <Form.Control name="username" type="input" onChange={this.handleChange}/>
+                  <Form.Control name="username" type="input" onChange={this.handleChange} required />
                 </Form.Group>
 
                 <Form.Group controlId="password">
                   <Form.Label>Password</Form.Label>
-                  <Form.Control name="password" type="password" onChange={this.handleChange} />
+                  <Form.Control name="password" type="password" onChange={this.handleChange} required />
                   <Form.Text className="small text-muted">Forgot your password? Too bad.</Form.Text>
                 </Form.Group>
 
