@@ -33,11 +33,11 @@ export default class ProfilePage extends Component {
       <Container style={{paddingTop: '2rem'}}>
         <Row className="d-flex justify-content-between">
           <Col>
-            <h4>Your repositories</h4>
+            <h4>Your projects</h4>
           </Col>
 
           <Col style={{textAlign: 'right'}}>
-            <Button variant="success" href="/new">New repository</Button>
+            <Button variant="success" href="/new">New project</Button>
           </Col>
         </Row>
 
