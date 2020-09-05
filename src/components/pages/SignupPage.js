@@ -75,9 +75,9 @@ export default class SignupPage extends Component {
         <h4 className="display-5">Create a new account</h4>
 
         <Container>
-          <Tabs defaultActiveKey="email" variant="pills" className="justify-content-center" style={{padding: '1rem 0'}}>
+          <Tabs defaultActiveKey="email" variant="pills" className="justify-content-center" style={{ padding: '1rem 0' }}>
             <Tab eventKey="email" title="Email">
-              <div className="d-flex justify-content-center" style={{ textAlign: 'left', padding: '1rem 0' }}>
+              <div className="d-flex justify-content-center" style={{ textAlign: 'left', paddingTop: '1rem' }}>
                 <Card className="shadow-sm" style={{ width: '25rem' }}>
                   <Card.Body>
                     {this.state.error ? <Alert variant='danger'>{this.state.error}</Alert> : null}
@@ -99,7 +99,7 @@ export default class SignupPage extends Component {
                       </Form.Group>
 
                       <div style={{ textAlign: 'center' }}>
-                        <Button variant="primary" size="lg" type="submit" className="w-100" style={{ fontSize:'14px' }}>Sign up</Button>
+                        <Button variant="primary" size="lg" type="submit" className="w-100" style={{ fontSize: '14px' }}>Sign up</Button>
                       </div>
                     </Form>
                   </Card.Body>
@@ -107,7 +107,7 @@ export default class SignupPage extends Component {
               </div>
             </Tab>
 
-            <Tab eventKey="other" title="Other">
+            <Tab eventKey="other" title="GitHub / Google">
               <div className="d-flex justify-content-center" style={{ textAlign: 'left', padding: '1rem 0' }}>
                 <Card className="shadow-sm" style={{ width: '25rem' }}>
                   <Card.Body>
@@ -117,14 +117,15 @@ export default class SignupPage extends Component {
                       <Form.Group controlId="username">
                         <Form.Label>Username</Form.Label>
                         <Form.Control name="username" type="input" onChange={this.handleChange} required />
+                        <Form.Text className="small text-muted">Choose a username, then click a provider below.</Form.Text>
                       </Form.Group>
 
                       <div style={{ textAlign: 'center', paddingBottom: '0.5rem' }}>
-                        <Button name="github" type="submit" variant="dark" size="lg" className="w-100" style={{ fontSize:'14px' }}><FontAwesomeIcon icon={faGithub}></FontAwesomeIcon> GitHub</Button>
+                        <Button name="github" type="submit" variant="dark" size="lg" className="w-100" style={{ fontSize: '14px' }}><FontAwesomeIcon icon={faGithub}></FontAwesomeIcon> GitHub</Button>
                       </div>
 
                       <div style={{ textAlign: 'center' }}>
-                        <Button name="google" type="submit" variant="info" size="lg" className="w-100" style={{ fontSize:'14px' }}><FontAwesomeIcon icon={faGoogle}></FontAwesomeIcon> Google</Button>
+                        <Button name="google" type="submit" variant="info" size="lg" className="w-100" style={{ fontSize: '14px' }}><FontAwesomeIcon icon={faGoogle}></FontAwesomeIcon> Google</Button>
                       </div>
                     </Form>
                   </Card.Body>
@@ -132,8 +133,16 @@ export default class SignupPage extends Component {
               </div>
             </Tab>
           </Tabs>
+
+          <div className="d-flex justify-content-center" style={{ textAlign: 'center', paddingTop: '1rem' }}>
+            <Card className="shadow-sm" style={{ width: '25rem' }}>
+              <Card.Body>
+                Already have an account? <a href="login">Login here</a>.
+              </Card.Body>
+            </Card>
+          </div>
         </Container>
-      </div>
+      </div >
     );
   }
 }

@@ -16,12 +16,18 @@ export default class PublicGuard extends Component {
   componentDidMount() {
     auth().onAuthStateChanged((user) => {
       if (!!user) {
-        getUsername(user.uid).then((result) => {
-          this.setState({
-            loading: false,
-            username: result
-          });
-        })
+        getUsername(user.uid)
+          .then((result) => {
+            this.setState({
+              loading: false,
+              username: result
+            });
+          })
+          .catch((error) => {
+            this.setState({
+              loading: false
+            });
+          })
       } else {
         this.setState({
           loading: false
@@ -43,7 +49,7 @@ export default class PublicGuard extends Component {
       return (
         <div>
           <ShellNav username={this.state.username}></ShellNav>
-  
+
           {
             React.Children.map(children, child => {
               return React.cloneElement(child, {
