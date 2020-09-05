@@ -91,6 +91,7 @@ export default class SignupPage extends Component {
                       <Form.Group controlId="email">
                         <Form.Label>Email</Form.Label>
                         <Form.Control name="email" type="input" onChange={this.handleChange} required />
+                        <Form.Text className="small text-muted">We'll never share your email with anyone.</Form.Text>
                       </Form.Group>
 
                       <Form.Group controlId="password">

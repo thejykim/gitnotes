@@ -3,6 +3,7 @@ import { Component } from "react";
 import Container from 'react-bootstrap/Container';
 
 import { getRepositories } from '../../services/AccountFunctions';
+import { Row, Col, Button } from "react-bootstrap";
 
 export default class ProfilePage extends Component {
   constructor(props) {
@@ -30,7 +31,15 @@ export default class ProfilePage extends Component {
   render() {
     return (
       <Container style={{paddingTop: '2rem'}}>
-        <h4>Your repositories</h4>
+        <Row className="d-flex justify-content-between">
+          <Col>
+            <h4>Your repositories</h4>
+          </Col>
+
+          <Col style={{textAlign: 'right'}}>
+            <Button variant="success" href="/new">New repository</Button>
+          </Col>
+        </Row>
 
         <hr />
 

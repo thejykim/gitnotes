@@ -55,7 +55,7 @@ export default class Homepage extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{paddingBottom: '4rem'}}>
         <div style={{ padding: '4rem 0', marginBottom: '4rem', backgroundColor: '#2b3137' }}>
           <Container>
             <Row className="d-flex align-items-center">

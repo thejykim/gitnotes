@@ -17,7 +17,7 @@ export default class ShellNav extends Component {
 
   render() {
     const children = this.props.children;
-    
+
     return (
       <div>
         <Navbar bg="light" expand="lg">
@@ -43,13 +43,20 @@ export default class ShellNav extends Component {
         </Navbar>
 
         {
-            React.Children.map(children, child => {
-              return React.cloneElement(child, {
-                username: this.state.username,
-                uid: this.state.uid
-              });
-            })
-          }
+          React.Children.map(children, child => {
+            return React.cloneElement(child, {
+              username: this.state.username,
+              uid: this.state.uid
+            });
+          })
+        }
+
+        <footer className="footer">
+          <Container>
+            <span class="text-muted">&copy; 2020 GitNotes.
+            Source code available on <a href="https://github.com/thejykim/gitnotes" target="_blank">GitHub</a>.</span>
+          </Container>
+        </footer>
       </div>
     );
   }
