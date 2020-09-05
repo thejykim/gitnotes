@@ -10,11 +10,14 @@ export default class ShellNav extends Component {
 
     this.state = {
       loggedIn: !!this.props.username,
-      username: this.props.username
+      username: this.props.username,
+      uid: this.props.uid
     };
   }
 
   render() {
+    const children = this.props.children;
+    
     return (
       <div>
         <Navbar bg="light" expand="lg">
@@ -39,7 +42,14 @@ export default class ShellNav extends Component {
           </Container>
         </Navbar>
 
-        {this.props.children}
+        {
+            React.Children.map(children, child => {
+              return React.cloneElement(child, {
+                username: this.state.username,
+                uid: this.state.uid
+              });
+            })
+          }
       </div>
     );
   }

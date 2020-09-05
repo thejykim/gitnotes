@@ -9,7 +9,8 @@ export default class PrivateGuard extends Component {
     super();
     this.state = {
       loading: true,
-      username: null
+      username: null,
+      uid: null
     }
   }
 
@@ -19,7 +20,8 @@ export default class PrivateGuard extends Component {
         getUsername(user.uid).then((result) => {
           this.setState({
             loading: false,
-            username: result
+            username: result,
+            uid: user.uid
           });
         })
       } else {
@@ -47,7 +49,8 @@ export default class PrivateGuard extends Component {
           {
             React.Children.map(children, child => {
               return React.cloneElement(child, {
-                username: this.state.username
+                username: this.state.username,
+                uid: this.state.uid
               });
             })
           }

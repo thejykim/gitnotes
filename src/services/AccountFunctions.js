@@ -129,3 +129,18 @@ export function getUsername(uid) {
       })
   })
 }
+
+export function getRepositories(uid) {
+  return new Promise((resolve, reject) => {
+    db.ref('users/' + uid).once('value', function(snapshot) {
+      if (snapshot.hasChildren() && snapshot.hasChild('repos')) {
+        resolve(snapshot.val().repos)
+      } else {
+        reject(new Error("No repositories found."));
+      }
+    })
+      .catch((error) => {
+        reject(error);
+      })
+  })
+}
