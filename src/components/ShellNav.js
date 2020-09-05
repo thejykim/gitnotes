@@ -53,7 +53,7 @@ export default class ShellNav extends Component {
 
         <footer className="footer">
           <Container>
-            <span class="text-muted">&copy; 2020 GitNotes.
+            <span className="text-muted">&copy; 2020 GitNotes.
             Source code available on <a href="https://github.com/thejykim/gitnotes" target="_blank">GitHub</a>.</span>
           </Container>
         </footer>
