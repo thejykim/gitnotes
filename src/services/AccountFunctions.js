@@ -33,7 +33,6 @@ export function registerUser(username, emailOrProvider, password) {
       }
     });
   } else {
-
     return new Promise((resolve, reject) => {
       if (username.length < 3) {
         reject(new Error("Your username must be 3 or more characters."))

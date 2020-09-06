@@ -12,19 +12,33 @@ export default class NewProject extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(event) {
+    console.log('clicked');
   }
 
   handleChange(event) {
     const name = event.target.name;
     this.setState({
       [name]: event.target.value
+    }, () => {
+      if (this.state.formComplete) {
+        // it's okay to access length property at this point, since we know they're empty strings
+        if (this.state.githubUser.length == 0 || this.state.githubRepo.length == 0) {
+          this.setState({
+            formComplete: false
+          });
+        }
+      } else {
+        if (this.state.githubUser && this.state.githubRepo && this.state.githubUser.length > 0 && this.state.githubRepo.length > 0) {
+          this.setState({
+            formComplete: true
+          });
+        }
+      }
     });
-
-    if (this.state.githubUser && this.state.githubRepo) {
-      this.setState({
-        formComplete: true
-      });
-    }
   }
 
   render() {
@@ -50,7 +64,7 @@ export default class NewProject extends Component {
 
         <br />
 
-        <Button variant="success" disabled={!this.state.formComplete}>Create</Button>
+        <Button variant="success" disabled={!this.state.formComplete} onClick={this.handleSubmit}>Next</Button>
       </Container>
     );
   }
