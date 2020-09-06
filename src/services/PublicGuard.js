@@ -9,8 +9,7 @@ export default class PublicGuard extends Component {
     super();
     this.state = {
       loading: true,
-      username: null,
-      uid: null
+      username: null
     }
   }
 
@@ -55,8 +54,7 @@ export default class PublicGuard extends Component {
           {
             React.Children.map(children, child => {
               return React.cloneElement(child, {
-                username: this.state.username,
-                uid: this.state.uid
+                username: this.state.username
               });
             })
           }

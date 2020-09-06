@@ -7,15 +7,15 @@ export function registerUser(username, emailOrProvider, password) {
       if (username.length < 3) {
         reject(new Error("Your username must be 3 or more characters."))
       } else {
-        db.ref('users').orderByChild('username').equalTo(username).once('value', function (snapshot) {
+        db.ref('users/' + username).once('value', function (snapshot) {
           if (snapshot.hasChildren()) {
             reject(new Error("Username already taken, try another."));
           } else {
             auth().createUserWithEmailAndPassword(emailOrProvider, password)
               .then((result) => {
                 const newID = result.user.uid;
-                db.ref('users/' + newID).set({
-                  username: username,
+                db.ref('users/' + username).set({
+                  uid: newID,
                   email: emailOrProvider
                 })
                   .then((result) => {
@@ -37,7 +37,7 @@ export function registerUser(username, emailOrProvider, password) {
       if (username.length < 3) {
         reject(new Error("Your username must be 3 or more characters."))
       } else {
-        db.ref('users').orderByChild('username').equalTo(username).once('value', function (snapshot) {
+        db.ref('users/' + username).once('value', function (snapshot) {
           if (snapshot.hasChildren()) {
             reject(new Error("Username already taken, try another."));
           } else {
@@ -46,8 +46,8 @@ export function registerUser(username, emailOrProvider, password) {
             auth().signInWithPopup(provider)
               .then((result) => {
                 const newID = result.user.uid;
-                db.ref('users/' + newID).set({
-                  username: username,
+                db.ref('users/' + username).set({
+                  uid: newID,
                   email: result.user.email
                 })
                   .then((result) => {
@@ -71,12 +71,9 @@ export function registerUser(username, emailOrProvider, password) {
 export function usernamePasswordSignin(usernameOrProvider, password) {
   if (password) {
     return new Promise((resolve, reject) => {
-      db.ref('users').orderByChild('username').equalTo(usernameOrProvider).once('value', function (snapshot) {
+      db.ref('users/' + username).once('value', function (snapshot) {
         if (snapshot.hasChildren()) {
-          const json = snapshot.toJSON();
-          const key = Object.keys(json)[0];
-
-          auth().signInWithEmailAndPassword(json[key].email, password)
+          auth().signInWithEmailAndPassword(snapshot.val().email, password)
             .then((user) => {
               resolve(user);
             })
@@ -116,11 +113,14 @@ export function usernamePasswordSignin(usernameOrProvider, password) {
 
 export function getUsername(uid) {
   return new Promise((resolve, reject) => {
-    db.ref('users/' + uid).once('value', function(snapshot) {
+    db.ref('users').orderByChild('uid').equalTo(uid).once('value', function (snapshot) {
       if (snapshot.hasChildren()) {
-        resolve(snapshot.val().username)
+        const json = snapshot.toJSON();
+        const key = Object.keys(json)[0];
+
+        resolve(key);
       } else {
-        reject(new Error("User doesn't exist."));
+        reject(new Error("We don't recognize that username."));
       }
     })
       .catch((error) => {
@@ -129,9 +129,9 @@ export function getUsername(uid) {
   })
 }
 
-export function getRepositories(uid) {
+export function getRepositories(username) {
   return new Promise((resolve, reject) => {
-    db.ref('users/' + uid).once('value', function(snapshot) {
+    db.ref('users/' + username).once('value', function (snapshot) {
       if (snapshot.hasChildren() && snapshot.hasChild('repos')) {
         resolve(snapshot.val().repos)
       } else {
