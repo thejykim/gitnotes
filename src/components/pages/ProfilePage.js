@@ -2,7 +2,7 @@ import { Component } from "react";
 
 import Container from 'react-bootstrap/Container';
 
-import { getRepositories } from '../../services/AccountFunctions';
+import { getProjects } from '../../services/ProjectFunctions';
 import { Row, Col, Button } from "react-bootstrap";
 
 export default class ProfilePage extends Component {
@@ -12,15 +12,15 @@ export default class ProfilePage extends Component {
     this.state = {
       username: this.props.username,
       uid: this.props.uid,
-      repositories: null
+      projects: null
     }
   }
 
   componentDidMount() {
-    getRepositories(this.state.uid)
-      .then((repos) => {
+    getProjects(this.state.username)
+      .then((proj) => {
         this.setState({
-          repositories: repos
+          projects: proj
         })
       })
       .catch((error) => {

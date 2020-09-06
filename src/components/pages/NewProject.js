@@ -1,14 +1,20 @@
 import { Component } from "react";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Alert } from "react-bootstrap";
+
+import { createProject } from '../../services/ProjectFunctions';
 
 export default class NewProject extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
+      username: this.props.username,
+      projectName: null,
+      projectDesc: '',
       githubUser: null,
       githubRepo: null,
-      formComplete: false
+      formComplete: false,
+      error: null
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -16,7 +22,16 @@ export default class NewProject extends Component {
   }
 
   handleSubmit(event) {
-    console.log('clicked');
+    createProject(this.state.username, this.state.projectName,
+      this.state.projectDesc, this.state.githubUser, this.state.githubRepo)
+      .then((result) => {
+        window.location.replace('/profile');
+      })
+      .catch((error) => {
+        this.setState({
+          error: error.toString()
+        });
+      })
   }
 
   handleChange(event) {
@@ -26,13 +41,14 @@ export default class NewProject extends Component {
     }, () => {
       if (this.state.formComplete) {
         // it's okay to access length property at this point, since we know they're empty strings
-        if (this.state.githubUser.length == 0 || this.state.githubRepo.length == 0) {
+        if (this.state.githubUser.length == 0 || this.state.githubRepo.length == 0 || this.state.projectName == 0) {
           this.setState({
             formComplete: false
           });
         }
       } else {
-        if (this.state.githubUser && this.state.githubRepo && this.state.githubUser.length > 0 && this.state.githubRepo.length > 0) {
+        if (this.state.githubUser && this.state.githubRepo && this.state.projectName
+          && this.state.githubUser.length > 0 && this.state.githubRepo.length > 0 && this.state.projectName.length > 0) {
           this.setState({
             formComplete: true
           });
@@ -47,6 +63,24 @@ export default class NewProject extends Component {
         <h4>Create a new project</h4>
         <p className="text-muted">You'll need an existing GitHub repository to base this project on.</p>
         <hr />
+
+        <br />
+
+        {this.state.error ? <Alert variant='danger'>{this.state.error}</Alert> : null}
+
+        <h6>Project name</h6>
+        <Form>
+          <Form.Control name="projectName" id="projectName" placeholder="ReactJS" onChange={this.handleChange} />
+        </Form>
+
+        <br />
+
+        <h6>Description <small className="text-muted">(optional)</small></h6>
+        <Form>
+          <Form.Control name="projectDesc" id="projectDesc"
+          placeholder="A declarative, efficient, and flexible JavaScript library for building user interfaces."
+          onChange={this.handleChange} />
+        </Form>
 
         <br />
 

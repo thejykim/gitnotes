@@ -35,7 +35,9 @@ export function registerUser(username, emailOrProvider, password) {
   } else {
     return new Promise((resolve, reject) => {
       if (username.length < 3) {
-        reject(new Error("Your username must be 3 or more characters."))
+        reject(new Error("Your username must be 3 or more characters."));
+      } else if (username.length > 25) {
+        reject(new Error("Your username must be 25 or less characters."));
       } else {
         db.ref('users/' + username).once('value', function (snapshot) {
           if (snapshot.hasChildren()) {
@@ -121,21 +123,6 @@ export function getUsername(uid) {
         resolve(key);
       } else {
         reject(new Error("We don't recognize that username."));
-      }
-    })
-      .catch((error) => {
-        reject(error);
-      })
-  })
-}
-
-export function getRepositories(username) {
-  return new Promise((resolve, reject) => {
-    db.ref('users/' + username).once('value', function (snapshot) {
-      if (snapshot.hasChildren() && snapshot.hasChild('repos')) {
-        resolve(snapshot.val().repos)
-      } else {
-        reject(new Error("No repositories found."));
       }
     })
       .catch((error) => {
