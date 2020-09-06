@@ -41,19 +41,27 @@ export default class ProfilePage extends Component {
           </Col>
         </Row>
 
-        <hr />
+        { this.state.projects ? Object.keys(this.state.projects).map((key) => {
+          const project = this.state.projects[key];
+          console.log(project.name);
 
-        <div style={{padding: '0.5rem 1rem'}}>
-          <h5>gitnotes</h5>
-          <p>Add intuitive documentation for your git projects.</p>
-        </div>
+          return(
+            <div>
+              <hr />
+              <div style={{padding: '0.5rem 1rem'}}>
+                <h5>{ project.name } {' '}
+                  <small className="text-muted">
+                    { project.gitUser + '/' + project.gitRepo }
+                  </small>
+                </h5>
 
-        <hr />
-        
-        <div style={{padding: '0.5rem 1rem'}}>
-          <h5>intellinote</h5>
-          <p>Easily create original compositions with a powerful creation kit.</p>
-        </div>
+                <p>
+                  { project.desc }
+                </p>
+              </div>
+            </div>
+          );
+        }) : <div><hr /><p>No projects found.</p></div>}
       </Container>
     );
   }
