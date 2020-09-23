@@ -22,7 +22,7 @@ export default class ShellNav extends Component {
       <div>
         <Navbar bg="light" expand="lg">
           <Container>
-            <Navbar.Brand>Git<strong>Notes</strong></Navbar.Brand>
+            <Navbar.Brand>Next<strong>Login</strong></Navbar.Brand>
             <Navbar.Toggle aria-controls="shell-nav" />
             <Navbar.Collapse id="shell-nav" className="justify-content-between">
               <Nav>
@@ -53,8 +53,8 @@ export default class ShellNav extends Component {
 
         <footer className="footer">
           <Container>
-            <span className="text-muted">&copy; 2020 GitNotes.
-            Source code available on <a href="https://github.com/thejykim/gitnotes" target="_blank">GitHub</a>.</span>
+            <span className="text-muted">&copy; 2020 NextLogin.
+            Source code available on <a href="https://github.com/thejykim/nextlogin" target="_blank">GitHub</a>.</span>
           </Container>
         </footer>
       </div>

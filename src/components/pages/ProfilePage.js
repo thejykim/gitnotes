@@ -37,31 +37,40 @@ export default class ProfilePage extends Component {
           </Col>
 
           <Col style={{textAlign: 'right'}}>
-            <Button variant="success" href="/new">New project</Button>
+            <Button variant="success" href="#">New project</Button>
           </Col>
         </Row>
 
-        { this.state.projects ? Object.keys(this.state.projects).map((key) => {
-          const project = this.state.projects[key];
-          console.log(project.name);
+        <div>
+          <hr />
+          <div style={{padding: '0.5rem 1rem'}}>
+            <h5>Static Content {' '}
+              <small className="text-muted">
+                with a subtitle
+              </small>
+            </h5>
 
-          return(
-            <div>
-              <hr />
-              <div style={{padding: '0.5rem 1rem'}}>
-                <h5>{ project.name } {' '}
-                  <small className="text-muted">
-                    { project.gitUser + '/' + project.gitRepo }
-                  </small>
-                </h5>
+            <p>
+              Procedurally generate this content in ProfilePage.js.
+            </p>
+          </div>
+        </div>
 
-                <p>
-                  { project.desc }
-                </p>
-              </div>
-            </div>
-          );
-        }) : <div><hr /><p>No projects found.</p></div>}
+        
+        <div>
+          <hr />
+          <div style={{padding: '0.5rem 1rem'}}>
+            <h5>Another Project {' '}
+              <small className="text-muted">
+                thejykim/nextlogin
+              </small>
+            </h5>
+
+            <p>
+              Optional description here?
+            </p>
+          </div>
+        </div>
       </Container>
     );
   }

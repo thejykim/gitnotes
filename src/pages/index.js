@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>GitNotes</title>
+        <title>NextLogin</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

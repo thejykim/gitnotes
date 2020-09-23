@@ -60,8 +60,8 @@ export default class Homepage extends Component {
           <Container>
             <Row className="d-flex align-items-center">
               <Col className="text-white" style={{ textAlign: 'center' }}>
-                <h1 className="display-5">Every commit matters.</h1>
-                <p className="lead">Documenting your git projects just became easy.</p>
+                <h1 className="display-5">Minimalistic OAuth.</h1>
+                <p className="lead">Built with React, Next.js, and Firebase.</p>
               </Col>
 
               <Col>
@@ -114,20 +114,20 @@ export default class Homepage extends Component {
             <Card.Body>
               <Row style={{ padding: '2rem' }} className="d-flex align-items-center">
                 <Col>
-                  <h2 className="display-5">Beneficial for everyone</h2>
-                  <p className="lead">Sometimes a README isn't enough.</p>
+                  <h2 className="display-5">Built to be flexible</h2>
+                  <p className="lead">All features optional to the framework</p>
                 </Col>
 
                 <Col style={{ textAlign: 'center' }}>
-                  <h5>Students</h5>
-                  <p>Don't just list off your tech stack on GitHub.</p>
-                  <Button variant="outline-primary">Show, don't tell</Button>
+                  <h5>Auth Guards</h5>
+                  <p>Procedurally blocks public or private routes.</p>
+                  <Button variant="outline-primary">View source</Button>
                 </Col>
 
                 <Col style={{ textAlign: 'center' }}>
-                  <h5>Organizations</h5>
-                  <p>Expecting collaborators in the future?</p>
-                  <Button variant="outline-primary">See how it helps</Button>
+                  <h5>Unique Usernames</h5>
+                  <p>Stores linked usernames to <a href="https://firebase.google.com/docs/database">Realtime Database</a>.</p>
+                  <Button variant="outline-primary">More features</Button>
                 </Col>
               </Row>
             </Card.Body>

@@ -66,7 +66,7 @@ export default class LoginPage extends Component {
   render() {
     return (
       <div style={{ textAlign: 'center', padding: '4rem 0' }}>
-        <h4 className="display-5">Sign in to GitNotes</h4>
+        <h4 className="display-5">Sign in to NextLogin</h4>
 
         <div className="d-flex justify-content-center" style={{ textAlign: 'left', paddingTop: '1rem' }}>
           <Card className="shadow-sm" style={{ width: '25rem' }}>
